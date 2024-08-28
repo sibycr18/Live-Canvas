@@ -8,6 +8,8 @@ let lastY = 0;
 let brushSize = 2;
 let color = '#000000';
 let username = '';
+let eraserSize = 10;  // Default eraser size
+let erasing = false; // Flag to indicate if the eraser is active
 
 // Event listener for username input
 const usernameInput = document.getElementById('username');
@@ -20,6 +22,24 @@ const brushSizeInput = document.getElementById('brushSize');
 brushSizeInput.addEventListener('input', () => {
     brushSize = brushSizeInput.value;
     // console.log('Brush size updated to:', brushSize);
+});
+
+// Event listener for eraser size slider
+const eraserSizeInput = document.getElementById('eraserSize');
+eraserSizeInput.addEventListener('input', () => {
+    eraserSize = eraserSizeInput.value;
+    console.log('Eraser size updated to:', eraserSize);
+});
+
+// Event listener for the eraser button
+const eraserButton = document.getElementById('eraser');
+eraserButton.addEventListener('click', () => {
+    erasing = !erasing;  // Toggle eraser mode
+    if (erasing) {
+        eraserButton.style.backgroundColor = 'lightgray'; // Indicate eraser is active
+    } else {
+        eraserButton.style.backgroundColor = ''; // Reset button style when not erasing
+    }
 });
 
 // Event listener for color picker
@@ -49,9 +69,12 @@ canvas.addEventListener('mousemove', draw);
 function draw(event) {
     if (!drawing) return;
 
+    const drawColor = erasing ? '#ffffff' : color; // Use white (or canvas background color) for erasing
+    const size = erasing ? eraserSize : brushSize;  // Use eraser size if erasing, otherwise use brush size
+    // console.log('Erasing: ', erasing, '\tColor: ', drawColor,'\tSize:' ,size);
     const x = event.offsetX;
     const y = event.offsetY;
-    const data = { x, y, lastX, lastY, brushSize, color, username };
+    const data = { x, y, lastX, lastY, brushSize: size, color: drawColor, username };
 
     socket.emit('draw', data);  // Emit the draw event to the server
     drawOnCanvas(data);  // Draw on the local canvas
