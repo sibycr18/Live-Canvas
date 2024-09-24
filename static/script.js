@@ -110,3 +110,20 @@ socket.on('clearCanvas', () => {
     console.log('Clearing canvas from server...');
     clearCanvas();
 });
+
+// Set the actual drawing resolution
+function resizeCanvas() {
+    // Preserve the current content before resizing
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    
+    // Set the canvas size to match its CSS size
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+
+    // Put the content back after resizing
+    ctx.putImageData(imageData, 0, 0);
+}
+
+// Call this function on window resize
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();  // Call initially to set up the size

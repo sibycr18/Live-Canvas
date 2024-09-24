@@ -1,43 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <title>Collaborative Canvas</title>
+        <link rel="stylesheet" href="../static/style.css" />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collaborative Canvas</title>
-    <style>
-        canvas {
-            border: 1px solid black;
-        }
-    </style>
-</head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h2 id="header-title">Live Canvas</h2>
+            </div>
 
-<body>
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" placeholder="Enter your name">
+            <div class="body-container">
+                <div class="control-bar">
+                    <div class="username-form">
+                        <label for="username">Username:</label>
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            placeholder="Enter your name"
+                        />
+                    </div>
+                    <div class="brush-size-form">
+                        <label for="brushSize">Brush Size:</label>
+                        <input
+                            type="range"
+                            id="brushSize"
+                            name="brushSize"
+                            min="1"
+                            max="10"
+                            value="2"
+                        />
+                    </div>
+                    <div class="color-form">
+                        <label for="colorPicker">Color:</label>
+                        <input
+                            type="color"
+                            id="colorPicker"
+                            name="colorPicker"
+                            value="#000000"
+                        />
+                    </div>
+                    <div class="eraser-size-form">
+                        <label for="eraserSize">Eraser Size:</label>
+                        <input
+                            type="range"
+                            id="eraserSize"
+                            name="eraserSize"
+                            min="5"
+                            max="200"
+                            value="10"
+                        />
+                    </div>
+                    <button id="eraser">Eraser</button>
+                    <button id="clearCanvas">
+                        <ion-icon name="trash-outline"></ion-icon>
+                    </button>
+                </div>
+                <canvas class="magicpattern" id="canvas" width="800" height="600"></canvas>
+            </div>
+        </div>
 
-    <label for="brushSize">Brush Size:</label>
-    <input type="range" id="brushSize" name="brushSize" min="1" max="10" value="2">
+        <!-- Load Socket.IO -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+        <!-- Load custom script -->
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
 
-    <label for="colorPicker">Color:</label>
-    <input type="color" id="colorPicker" name="colorPicker" value="#000000">
-
-    <label for="eraserSize">Eraser Size:</label>
-    <input type="range" id="eraserSize" name="eraserSize" min="5" max="200" value="10">
-
-    <button id="eraser">Eraser</button>
-
-    <button id="clearCanvas"><ion-icon name="trash-outline"></ion-icon></button>
-
-    <canvas id="canvas" width="800" height="600"></canvas>
-
-    <!-- Load Socket.IO -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
-    <!-- Load custom script -->
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
-
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-</body>
-
+        <script
+            type="module"
+            src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+        ></script>
+        <script
+            nomodule
+            src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+        ></script>
+    </body>
 </html>
