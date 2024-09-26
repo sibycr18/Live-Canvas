@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
         <title>Collaborative Canvas</title>
         <link rel="stylesheet" href="../static/style.css" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     </head>
 
     <body>
@@ -15,7 +16,7 @@
 
             <div class="body-container">
                 <div class="control-bar">
-                    <div class="username-form">
+                    <div class="action-form">
                         <label for="username">Username:</label>
                         <input
                             type="text"
@@ -24,7 +25,7 @@
                             placeholder="Enter your name"
                         />
                     </div>
-                    <div class="brush-size-form">
+                    <div class="action-form">
                         <label for="brushSize">Brush Size:</label>
                         <input
                             type="range"
@@ -35,7 +36,7 @@
                             value="2"
                         />
                     </div>
-                    <div class="color-form">
+                    <div class="action-form">
                         <label for="colorPicker">Color:</label>
                         <input
                             type="color"
@@ -44,7 +45,7 @@
                             value="#000000"
                         />
                     </div>
-                    <div class="eraser-size-form">
+                    <div class="action-form">
                         <label for="eraserSize">Eraser Size:</label>
                         <input
                             type="range"
@@ -55,9 +56,16 @@
                             value="10"
                         />
                     </div>
-                    <button id="eraser">Eraser</button>
+                    <button id="eraser">
+                        <span class="material-symbols-outlined">
+                            ink_eraser
+                            </span>
+                    </button>
                     <button id="clearCanvas">
-                        <ion-icon name="trash-outline"></ion-icon>
+                        <span class="material-symbols-outlined">
+                            delete
+                            </span>
+                        <!-- <ion-icon name="trash-outline"></ion-icon> -->
                     </button>
                 </div>
                 <canvas class="magicpattern" id="canvas" width="800" height="600"></canvas>
@@ -68,14 +76,5 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
         <!-- Load custom script -->
         <script src="{{ url_for('static', filename='script.js') }}"></script>
-
-        <script
-            type="module"
-            src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
-        ></script>
-        <script
-            nomodule
-            src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
-        ></script>
     </body>
 </html>
